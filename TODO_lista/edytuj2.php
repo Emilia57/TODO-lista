@@ -11,20 +11,54 @@
     <meta charset="UTF-8">
     <title>Lista zadań</title>
     <link rel="stylesheet" href="style.css">
-    <style>
-        main {
-            flex-direction: column;
-        }
-    </style>
 </head>
 <body>
     <header>
         <h1><a href="index.php">Lista zadań</a></h1>
     </header>
     <aside>
+        <table>
+            <thead>
+                <tr>
+                    <th>Numer zadania</th>
+                    <th>Typ zadania</th>
+                    <th>Kiedy było zadane?</th>
+                    <th>Do kiedy jest zadane?</th>
+                    <th>Priorytet zadania</th>
+                    <th>Opis zadania</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                    $id_edytuj = $_POST["edytuj"];
+                    $zap = "SELECT * FROM zadania WHERE zadanie_id = '$id_edytuj';";
+                    $wynik = mysqli_query($conn, $zap);
+
+                    while ($x = mysqli_fetch_array($wynik)) {
+                        echo "<tr><td>".$x[0]."</td><td>".$x[1]."</td><td>".$x[2]."</td><td>".$x[3]."</td><td>".$x[4]."</td><td>".$x[5]."</td></tr>";
+                    }
+                ?>
+            </tbody>
+        </table>
+        <div><h2>Komentarze do zadania:</h2>
+        <hr>
+        <ul>
+            <?php
+                $zap2 = "SELECT komentarz FROM komentarze WHERE zadanie_id = '$id_edytuj';";
+                $wynik2 = mysqli_query($conn, $zap2);
+
+                while ($x = mysqli_fetch_array($wynik2)) {
+                    echo "<li>".$x[0]."</li>";
+                }
+            ?>
+        </ul></div>
+    </aside>
+    <main>
         <form action="edytuj3.php" method="post">
-            <label for="edytuj"><h3>Które zadanie edytować:</h3></label>
-            <input type="number" id="edytuj" name="edytuj" required>
+            <?php
+                $id_edytuj = $_POST["edytuj"];
+                echo "<input type=\"hidden\" id=\"numer\" name=\"numer\" value=\"".$id_edytuj."\">";
+            ?>
             <label for="typ"><h3>Typ zadania:</h3></label>
             <select id="typ" name="typ">
                 <option value="">nie zmieniaj</option>
@@ -49,48 +83,10 @@
             <textarea id="komentarz" name="komentarz"></textarea><br>
             <button type="submit">Edytuj</button>
         </form>
-    </aside>
-    <main>
-        <table>
-            <thead>
-                <tr>
-                    <th>Numer zadania</th>
-                    <th>Typ zadania</th>
-                    <th>Kiedy było zadane?</th>
-                    <th>Do kiedy jest zadane?</th>
-                    <th>Priorytet zadania</th>
-                    <th>Opis zadania</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                    $id_edytuj = $_POST["edytuj"];
-                    $zap = "SELECT * FROM zadania WHERE zadanie_id = '$id_edytuj';";
-                    $wynik = mysqli_query($conn, $zap);
-
-                    while ($x = mysqli_fetch_array($wynik)) {
-                        echo "<tr><th>".$x[0]."</th><th>".$x[1]."</th><th>".$x[2]."</th><th>".$x[3]."</th><th>".$x[4]."</th></tr>";
-                    }
-                ?>
-            </tbody>
-        </table>
-        <h2>Komentarze do zadania:</h2>
-        <ul>
-            <?php
-                $zap2 = "SELECT komentarz FROM komentarze WHERE zadanie_id = '$id_edytuj';";
-                $wynik2 = mysqli_query($conn, $zap2);
-
-                while ($x = mysqli_fetch_array($wynik2)) {
-                    echo "<li>".$x[0]."</li>";
-                }
-            ?>
-        </ul>
     </main>
     <aside>
         <a href="dodaj.php">Dodaj zadanie</a><br>
-        <hr>
         <a href="edytuj.php">Edytuj zadanie</a><br>
-        <hr>
         <a href="usun.php">Usuń zadanie</a>
     </aside>
 </body>

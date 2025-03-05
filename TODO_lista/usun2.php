@@ -15,10 +15,10 @@
     <link rel="stylesheet" href="style.css">
     <style>
         main {
-            width: 70%;
+            width: 69%;
         }
         aside {
-            width: 30%;
+            width: 29%;
         }
     </style>
 </head>
@@ -42,7 +42,7 @@
                     $zap = "SELECT * FROM zadania;";
                     $wynik = mysqli_query($conn, $zap);
                     while ($x = mysqli_fetch_array($wynik)) {
-                        echo "<tr><th>".$x[0]."</th><th>".$x[1]."</th><th>".$x[2]."</th><th>".$x[3]."</th><th>".$x[4]."</th></tr>";
+                        echo "<tr><td>".$x[0]."</td><td>".$x[1]."</td><td>".$x[2]."</td><td>".$x[3]."</td><td>".$x[4]."</td></tr>";
                     }
                 ?>
             </tbody>
@@ -50,9 +50,7 @@
     </main>
     <aside>
         <a href="dodaj.php">Dodaj zadanie</a><br>
-        <hr>
         <a href="edytuj.php">Edytuj zadanie</a><br>
-        <hr>
         <a href="usun.php">Usuń zadanie</a>
     </aside>
 </body>
