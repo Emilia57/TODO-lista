@@ -1,0 +1,42 @@
+aside a {
+    background-color: #c5d5c5;
+    padding: 50px;
+    border-radius: 15px;
+    margin: 2px;
+    text-align: center;
+}
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    background-color: #c5d5c5;
+    border-radius: 15px;
+}
+main {
+    float: left;
+    background-color: #9fa9a3;
+    width: 50%;
+    height: 700px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+header {
+    text-align: center;
+    background-color: #c5d5c5;
+    clear: both;
+    height: 60px;
+    font-size: 25px;
+}
+aside {
+    float: left;
+    background-color: #babca9;
+    height: 700px;
+    width: 25%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+a {
+    color: black;
+}
